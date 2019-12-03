@@ -50,7 +50,9 @@ app.get('/home', (req, res) => {
 
 //Profile Routes
 app.get('/profile', (req, res) => {
-    res.render('profile', {user: req.user})
+    if(req.user != null){
+        res.render('profile', {user: req.user})
+    } else {res.redirect('/home')}
 })
 
 // Riot Account Link Routes
