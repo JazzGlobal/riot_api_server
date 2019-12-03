@@ -1,4 +1,14 @@
 <%- include('./partials/header', {user: user}); %>
 
+    <div class="container">
+        <h4>Username: <%=user.username%></h4>
+        <p><b>Email</b>: <%=user.email%></p>
+        <% if(user.accountId) { %>
+            <p><b>Riot Account ID</b>: <%=user.accountId%></p>
+            <p><b>Linked</b>: True</p>
+        <% } else { %>
+            <p><b>Linked</b>: False</p>
+            <% } %>
+    </div>
 
-  <%- include('./partials/footer'); %>
+<%- include('./partials/footer'); %>
