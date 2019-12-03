@@ -28,10 +28,12 @@
         <a class="nav-link" href="/">Profile</a>
       </li>
     </ul>
-    <!-- Checks if user is logged in. If not, show the login/signup buttons. Otherwise, she the logout button. -->
+    <!-- Checks if user is logged in. If not, show the login/signup buttons. Otherwise, show the logout button. -->
     <div class="auth-button-container"> 
         <% if (user) {%>
+            <% if(!user.accountId) { %>
             <a class="btn btn-outline-success my-2 my-sm-0" href="/link">Link Riot Account</a>
+            <% } %>
             <a class="btn btn-outline-success my-2 my-sm-0" href="/logout">Logout</a>
             <% } else { %>
                 <a class="btn btn-outline-success my-2 my-sm-0" href="/login">Login</a>
