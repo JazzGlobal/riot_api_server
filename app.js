@@ -128,6 +128,10 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.get('/failed', (req, res) => {
+    res.send('The login failed. Go back and try again.')
+})
+
 app.listen(3000, () => {
     console.log('Listening on port 3000')
 })
