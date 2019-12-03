@@ -1,0 +1,12 @@
+<%- include('./partials/header', {user: user}); %>
+<div class="container">
+    <form action="/link/connect" method="POST">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Summoner Name</label>
+          <input type="text" name="summoner_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+  <%- include('./partials/footer'); %>
