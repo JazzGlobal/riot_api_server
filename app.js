@@ -7,7 +7,7 @@ var express = require('express'),
 
 // MONGOOSE CONFIG
 // Input correct <password>
-mongoose.connect('mongodb+srv://admin:<password>@cluster0-o2apy.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb+srv://admin:<password>@cluster0-o2apy.mongodb.net/riot_api_server?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
 
 //PASSPORT CONFIG
 passport.serializeUser((user,done)=>{
