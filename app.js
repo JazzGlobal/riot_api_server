@@ -39,12 +39,18 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+// Home Routes
 app.get('/', (req, res) => {
     res.redirect('/home')
 })
 
 app.get('/home', (req, res) => {
     res.render('home', {user: req.user})
+})
+
+//Profile Routes
+app.get('/profile', (req, res) => {
+    res.render('profile', {user: req.user})
 })
 
 // Riot Account Link Routes
