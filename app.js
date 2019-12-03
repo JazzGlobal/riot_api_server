@@ -1,5 +1,6 @@
 var dev_key = 'RGAPI-b4af90a9-1bdf-47f4-954f-75a14482d0fd',
     express = require('express'),
+    request = require('request'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
@@ -44,6 +45,25 @@ app.get('/', (req, res) => {
 
 app.get('/home', (req, res) => {
     res.render('home', {user: req.user})
+})
+
+// Riot Account Link Routes
+
+app.get('/link', (req, res) => {
+    if(req.user == null){
+        res.redirect('/')
+    } else {return res.render('link', {user: req.user})}
+})
+
+app.post('/link/connect', (req, res) => {
+    request(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.body.summoner_name}?api_key=RGAPI-b4af90a9-1bdf-47f4-954f-75a14482d0fd`, (err, response, body) => {
+        console.log(req.user)
+        console.log('body:', body); // Print the HTML for the Google homepage.
+        res.redirect('/')
+
+        // Use Find User By ID and add "body.accountId" to the found user. Implement check to make sure this route cannot be accessed without first being logged in. 
+        // Ensure that relinking is not possible. 
+    })
 })
 
 // Authorization Routes 
