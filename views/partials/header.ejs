@@ -25,7 +25,9 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/">Profile</a>
+        <% if(user) { %>
+        <a class="nav-link" href="/profile">Profile</a>
+        <% } %>
       </li>
     </ul>
     <!-- Checks if user is logged in. If not, show the login/signup buttons. Otherwise, show the logout button. -->
