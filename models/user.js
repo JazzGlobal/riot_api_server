@@ -3,6 +3,11 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new mongoose.Schema({
     // TODO: Implement Validation.
+    username: {
+        type: String, 
+        unique: true,
+        required: true
+    },
     email: {
         type: String, 
         unique: true,
@@ -10,8 +15,6 @@ var UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        min: 8
     }
 })
 UserSchema.plugin(passportLocalMongoose)
