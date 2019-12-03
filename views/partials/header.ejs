@@ -27,12 +27,14 @@
       </li>
     </ul>
     <!-- Checks if user is logged in. If not, show the login/signup buttons. Otherwise, she the logout button. -->
-      <% if (user) {%>
-        <a class="btn btn-outline-success my-2 my-sm-0" href="/logout">Logout</a>
-        <% } else { %>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="/login">Login</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="/signup">Sign Up</a>
+    <div class="auth-button-container"> 
+        <% if (user) {%>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="/logout">Logout</a>
+            <% } else { %>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="/login">Login</a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="/signup">Sign Up</a>
             <% } %>
+    </div> 
   </div>
 </nav>
 <body>
