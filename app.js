@@ -1,4 +1,5 @@
-var express = require('express'),
+var dev_key = 'RGAPI-b4af90a9-1bdf-47f4-954f-75a14482d0fd',
+    express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
