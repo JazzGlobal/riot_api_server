@@ -6,7 +6,8 @@ var express = require('express'),
     app = express()
 
 // MONGOOSE CONFIG
-mongoose.connect('mongodb://localhost:27017/fwitter', {useNewUrlParser: true, useUnifiedTopology: true})
+// Input correct <password>
+mongoose.connect('mongodb+srv://admin:<password>@cluster0-o2apy.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
 
 //PASSPORT CONFIG
 passport.serializeUser((user,done)=>{
