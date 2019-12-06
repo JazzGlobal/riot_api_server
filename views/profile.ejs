@@ -10,6 +10,12 @@
         <% } else { %>
             <p><b>Linked</b>: False</p>
             <% } %>
+
+        <% champs.forEach((champ) => {  %>
+            <h2>Champ ID: <%=champ.championId%></h2>
+            <h2>Champ Level: <%=champ.championLevel%></h2>
+            <h2>Champ Points: <%=champ.championPoints%></h2>
+        <% }) %>
     </div>
 
 <%- include('./partials/footer'); %>

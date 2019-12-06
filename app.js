@@ -5,8 +5,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     LocalStrategy = require('passport-local'),
     User = require('./models/user'),
+    data_server = ' http://localhost:3001',
     app = express()
-
 // MONGOOSE CONFIG
 // Input correct <password>
 mongoose.connect('mongodb+srv://admin:admin@cluster0-o2apy.mongodb.net/riot_api_server?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
@@ -51,7 +51,30 @@ app.get('/home', (req, res) => {
 app.get('/profile', (req, res) => {
     if(req.user != null){
         // Perform data requests. 
-        res.render('profile', {user: req.user})
+        request(`${data_server}/summoner/championmastery/${req.user.summonerId}`, (err, response, body) => {
+            var bodyData = JSON.parse(body)
+            if(bodyData.length >= 3) {
+                var champData = [
+                    bodyData[0],
+                    bodyData[1],
+                    bodyData[2]
+                ]
+            } else {
+                // for loop over the results. This will catch less than 3 champion bugs and no champions at all bugs.
+                console.log('Not enough champions.')
+                
+            }
+
+            request(`${data_server}/matches/account/${req.user.accountId}`, (err, response, body) => {
+                var bodyData = JSON.parse(body)
+                if(bodyData.length >= 10) {
+                    for (var i = 0; i < 10; i++){
+                        // Send last 10 matches.
+                    }
+                }
+                // res.render('profile', {user: req.user, champs: champData})
+            })
+        })
     } else {res.redirect('/home')}
 })
 
