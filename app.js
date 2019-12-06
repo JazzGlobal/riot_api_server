@@ -51,6 +51,7 @@ app.get('/home', (req, res) => {
 //Profile Routes
 app.get('/profile', (req, res) => {
     if(req.user != null){
+        // Perform data requests. 
         res.render('profile', {user: req.user})
     } else {res.redirect('/home')}
 })
