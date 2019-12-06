@@ -1,5 +1,4 @@
-var dev_key = 'RGAPI-49506711-0958-403b-aa1e-764ef9f3aaba',
-    express = require('express'),
+var express = require('express'),
     request = require('request'),
     mongoose = require('mongoose'),
     passport = require('passport'),
