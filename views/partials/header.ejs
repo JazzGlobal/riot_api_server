@@ -33,7 +33,7 @@
     <!-- Checks if user is logged in. If not, show the login/signup buttons. Otherwise, show the logout button. -->
     <div class="auth-button-container"> 
         <% if (user) {%>
-            <% if(!user.accountId) { %>
+            <% if(!user.accountId || !user.summonerId) { %>
             <a class="btn btn-outline-success my-2 my-sm-0" href="/link">Link Riot Account</a>
             <% } %>
             <a class="btn btn-outline-success my-2 my-sm-0" href="/logout">Logout</a>

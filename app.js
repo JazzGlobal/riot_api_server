@@ -1,4 +1,4 @@
-var dev_key = 'RGAPI-b4af90a9-1bdf-47f4-954f-75a14482d0fd',
+var dev_key = 'RGAPI-49506711-0958-403b-aa1e-764ef9f3aaba',
     express = require('express'),
     request = require('request'),
     mongoose = require('mongoose'),
@@ -64,11 +64,11 @@ app.get('/link', (req, res) => {
 })
 
 app.post('/link/connect', (req, res) => {
-    request(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.body.summoner_name}?api_key=RGAPI-b4af90a9-1bdf-47f4-954f-75a14482d0fd`, (err, response, body) => {
+    request(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.body.summoner_name}?api_key=RGAPI-49506711-0958-403b-aa1e-764ef9f3aaba`, (err, response, body) => {
         console.log(req.user)
         var bodyData = JSON.parse(body)
         console.log(bodyData.accountId)
-        User.findByIdAndUpdate(req.user._id, {accountId: bodyData.accountId}, (err, foundUser) => {
+        User.findByIdAndUpdate(req.user._id, {accountId: bodyData.accountId, summonerId: bodyData.id}, (err, foundUser) => {
             if(err) {
                 console.log(err)
                 res.redirect('/') // Replace with on screen message.
