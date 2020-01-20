@@ -57,8 +57,9 @@ app.get('/search', (req, res) => {
             request(`${data_server}/summoner/championmastery/${summoner_data.id}`, (masteryError, masteryResponse, masteryBody) => {
                 if(masteryError) {
                     console.log(masteryError)
-                }
-                var mastery_data = JSON.parse(masteryBody)
+                } 
+                var mastery_data = JSON.parse(masteryBody) 
+                // TODO: Create new object using champID, name, and mastery points.
                 res.render('results', {summoner_data: summoner_data, mastery_data: mastery_data})
             })
         }
