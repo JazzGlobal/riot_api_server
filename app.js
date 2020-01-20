@@ -49,8 +49,19 @@ app.get('/home', (req, res) => {
 
 app.get('/search', (req, res) => {
     console.log(req.query.summoner_name)
-    request(`${data_server}/summoner/account/name/${req.query.summoner_name}`, (err, response, body) => {
-        res.send(body);
+    request(`${data_server}/summoner/account/name/${req.query.summoner_name}`, (userError, userResponse, userBody) => {
+        if(userError){
+            console.log(userError)
+        } else {
+            var summoner_data = JSON.parse(userBody)
+            request(`${data_server}/summoner/championmastery/${summoner_data.id}`, (masteryError, masteryResponse, masteryBody) => {
+                if(masteryError) {
+                    console.log(masteryError)
+                }
+                var mastery_data = JSON.parse(masteryBody)
+                res.render('result', {summoner_data: summoner_data, mastery_data: mastery_data})
+            })
+        }
     })
 })
 
