@@ -1,9 +1,14 @@
 <%- include('./partials/header');%>
 
+<% if(typeof summoner_data.name != 'undefined') { %>
 <%=summoner_data.name%>
 <%=mastery_data[0].championId%>
 <%=mastery_data[1].championId%>
 <%=mastery_data[2].championId%>
+
+<% } else { %>
+    There was an error retrieving the data!
+   <% } %>
 
 
 <%- include('./partials/footer'); %>
