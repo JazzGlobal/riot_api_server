@@ -47,112 +47,11 @@ app.get('/home', (req, res) => {
     res.render('home', {user: req.user})
 })
 
-//Profile Routes
-app.get('/profile', (req, res) => {
-    if(req.user != null){
-        // Perform data requests. 
-        request(`${data_server}/summoner/championmastery/${req.user.summonerId}`, (err, response, body) => {
-            var bodyData = JSON.parse(body)
-            if(bodyData.length >= 3) {
-                var champData = [
-                    bodyData[0],
-                    bodyData[1],
-                    bodyData[2]
-                ]
-            } else {
-                // for loop over the results. This will catch less than 3 champion bugs and no champions at all bugs.
-                console.log('Not enough champions.')
-                
-            }
-
-            request(`${data_server}/matches/account/${req.user.accountId}`, (err, response, body) => {
-                var bodyData = JSON.parse(body)
-                if(bodyData.length >= 10) {
-                    for (var i = 0; i < 10; i++){
-                        // Send last 10 matches.
-                    }
-                }
-                // res.render('profile', {user: req.user, champs: champData})
-            })
-        })
-    } else {res.redirect('/home')}
-})
-
-// Riot Account Link Routes
-
-app.get('/link', (req, res) => {
-    if(req.user == null){
-        res.redirect('/')
-    } else {return res.render('link', {user: req.user})}
-})
-
-app.post('/link/connect', (req, res) => {
-    request(`https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.body.summoner_name}?api_key=RGAPI-49506711-0958-403b-aa1e-764ef9f3aaba`, (err, response, body) => {
-        console.log(req.user)
-        var bodyData = JSON.parse(body)
-        console.log(bodyData.accountId)
-        User.findByIdAndUpdate(req.user._id, {accountId: bodyData.accountId, summonerId: bodyData.id}, (err, foundUser) => {
-            if(err) {
-                console.log(err)
-                res.redirect('/') // Replace with on screen message.
-            } else {
-                foundUser.save((err) => {
-                    if(err) {
-                        console.log(err)
-                    } else {
-                        res.redirect('/logout')
-                    }
-                })
-            }
-        })
-
-        // Use Find User By ID and add "body.accountId" to the found user. Implement check to make sure this route cannot be accessed without first being logged in. 
-        // Ensure that relinking is not possible. 
+app.get('/search', (req, res) => {
+    console.log(req.query.summoner_name)
+    request(`${data_server}/summoner/account/name/${req.query.summoner_name}`, (err, response, body) => {
+        res.send(body);
     })
-})
-
-// Authorization Routes 
-
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
-
-app.get('/login', (req, res) => {
-    if(req.user == null){
-        return res.render('login', {user: req.user});
-    } else {res.redirect('/')}
-});
-
-app.post('/login', passport.authenticate('local',{successRedirect: "/", failureRedirect: "/failed"}),
-  function(req, res, next){
-});
-
-app.get('/signup', (req, res) => {
-    if(req.user == null){
-        return res.render('signup', {user: req.user});
-    } else {res.redirect('/')}
-});
-
-app.post('/signup', (req, res) => {
-    var newUser = new User(
-        {
-            username: req.body.username, 
-            email: req.body.email,
-        });
-    User.register(newUser, req.body.password ,(err, user) => {
-        if(err){
-            console.log(err);
-            return res.render('signup', {user: user, err: err});
-        }
-        passport.authenticate('local')(req, res, ()=> {
-            res.redirect('/');
-        });
-    });
-});
-
-app.get('/failed', (req, res) => {
-    res.send('The login failed. Go back and try again.')
 })
 
 app.listen(3000, () => {
