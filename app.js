@@ -59,7 +59,7 @@ app.get('/search', (req, res) => {
                     console.log(masteryError)
                 }
                 var mastery_data = JSON.parse(masteryBody)
-                res.render('result', {summoner_data: summoner_data, mastery_data: mastery_data})
+                res.render('results', {summoner_data: summoner_data, mastery_data: mastery_data})
             })
         }
     })
